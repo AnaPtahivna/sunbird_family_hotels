@@ -1,0 +1,141 @@
+.menu {
+  background: #1f1f1f;
+  color: #5ec7cf;
+  padding: 13px 19px 28px 27px;
+  font-family: 'Oswald-Light', 'sans-serif';
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 90;
+}
+
+.menu-login {
+  font-size: 14px;
+  letter-spacing: 0.06em;
+}
+
+.menu-login:before,
+.menu-login:after {
+  display: table;
+  content: "";
+}
+
+.menu-login:after {
+  clear: both;
+}
+
+.menu-login__item {
+  display: inline-block;
+  align-items: right;
+  margin-left: 25px;
+  margin-bottom: 15px;
+}
+
+.menu-login a,
+.menu-login a:hover,
+.menu-login a:active,
+.menu-login a:visited {
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+}
+
+.menu-login a:hover {
+  color: #5ec7cf;
+}
+
+.pseudo-dropdown .dropdown-menu {
+  padding: 0;
+}
+
+.pseudo-dropdown .dropdown-menu .dropdown-header {
+  padding: 7px;
+  border-bottom: 1px solid #5ec7cf;
+  cursor: pointer;
+}
+
+.pseudo-dropdown .dropdown-menu .dropdown-header:last-child {
+  border-bottom: none;
+}
+
+.pseudo-dropdown .dropdown-menu .dropdown-header:hover {
+  background-color: #5ec7cf;
+  color: #fff;
+}
+
+.menu .ui-widget-content {
+  border: none !important;
+  width: 420px !important;
+}
+
+.menu .dropdown-header {
+  white-space: normal !important;
+}
+
+.menu .jq-number {
+  align-items: right;
+  width: 60px;
+}
+
+.menu .jq-number input {
+  font-size: 12px;
+  text-align: center;
+  padding: 4px 0;
+}
+
+.menu .form-control {
+  font-family: 'Oswald-Light', 'sans-serif';
+  letter-spacing: 0.2px;
+  padding: 2px 8px;
+  color: #000;
+  font-size: 14px;
+  border: none;
+}
+
+.menu__button {
+  display: inline-block;
+  text-align: right;
+}
+
+.menu select.form-control {
+  font-family: 'Oswald-Light', 'sans-serif';
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+.menu .fa {
+  padding: 9px 2px;
+  background-color: #fff;
+}
+
+.menu .form-group,
+.menu-calendar-wrapper {
+  position: relative !important;
+  display: inline-block !important;
+}
+
+.menu .last {
+  margin-right: 10px;
+}
+
+.menu ::-webkit-input-placeholder {
+  color: #000;
+}
+
+.menu ::-moz-placeholder {
+  color: #000;
+}
+
+.menu :-ms-input-placeholder {
+  color: #000;
+}
+
+.menu select {
+  -webkit-appearance: none;
+}
+
+.btn-info {
+  background-color: #5ec7cf;
+  text-transform: uppercase;
+  font: 17px 'Oswald-Medium', 'sans-serif';
+  padding: 6px 10px 4px;
+}

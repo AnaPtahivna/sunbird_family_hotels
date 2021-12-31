@@ -1,0 +1,92 @@
+.pagination {
+  font: 14px 'Titillium-Regular', 'sans-serif';
+}
+
+.pagination a,
+.pagination span {
+  color: #202020;
+}
+
+.pagination .previous,
+.pagination .next,
+.pagination a.active {
+  color: #33b6cf;
+}
+
+.form-control.size4-old {
+  width: 220px !important;
+}
+
+.form-control.size4 {
+  width: 258px !important;
+}
+
+.btn.size3 {
+  width: 150px;
+}
+
+.form-control.size1 {
+  width: 102px !important;
+}
+
+.form-control.size2 {
+  width: 130px !important;
+}
+
+.menu-guests-count {
+  width: 170px !important;
+  letter-spacing: 0.04em !important;
+
+}
+
+.content {
+  background: #eff9fa;
+  min-height: 600px;
+  padding: 40px 0 40px 0;
+}
+
+.form-control {
+  border-radius: 0;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+.content h1 {
+  font: 40px 'Oswald-Medium', 'sans-serif';
+  margin: 0 10px 20px 10px;
+  text-transform: uppercase;
+}
+
+.content h1 span {
+  color: #5fc7d0;
+}
+
+.content .index h1 {
+  font: 58px 'Titillium-Thin', 'sans-serif';
+  text-align: center;
+  padding: 0 40px;
+}
+
+.content h2 {
+  font: 58px 'Titillium-Thin', 'sans-serif';
+  margin: 20px 10px 0px 10px;
+  text-transform: uppercase;
+}
+
+hr.small {
+  border-top: 1px solid #000;
+  width: 30px;
+}
+
+.hrr {
+  border-top: 1px solid #000;
+  width: 40px;
+  margin-top: 5px;
+}
+
+.content .chead {
+  text-align: center;
+  padding: 0 40px 20px 40px;
+}

@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" type="image/x-ico" href="/img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Book the most suitable hotels for families, discover exclusively collected family amenities and travel tips for the most beautiful destinations">
+    <title>Sunbird Family Hotels - Hand Picked Collection Of The Best Family Hotels Of The World</title>
+    <link href="/lib/bootstrap/css/bootstrap.min.css?1" rel="stylesheet">
+    <link href="/lib/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/lib/web-fonts/web-fonts.css" rel="stylesheet" type="text/css">
+    <link href="/lib/fotorama/fotorama.css" rel="stylesheet">
+    <link href="/lib/formstyler/formstyler.css?1" rel="stylesheet">
+    <link href="./scss/main.scss" rel="stylesheet">
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.min.js?1"></script>
+    <script src="/lib/fotorama/fotorama.js"></script>
+    <script src="/lib/sticky-kit/sticky-kit.js"></script>
+    <script src="/lib/formstyler/formstyler.js?1"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 logo">
+
+                <nav class="navbar navbar-default navbar-static-top" role="navigation">
+
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Menu</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <p class="logo-sidebar"><a href="/"><img src="/img/logo.png" alt="Sunbird"></a></p>
+                    <h2 class="logo-title">Family Hotels Collection</h2>
+                </nav>
+
+                <nav class="sidebar" role="navigation">
+                    <div class="nav sidebar-nav navbar-collapse collapse">
+                        <div class="sidebar-item">
+                            <hr class="sidebar-item__line">
+                            <h2><a class="link scenario" href="/scenarios/">Travel <br> Scenarios</a></h2>
+                        </div>
+                        <div class="item item_small">
+                            <hr class="item__line item__line_large">
+                            <div><a class="link menu-link-item" href="/about/">About us</a></div>
+                            <div><a class="link menu-link-item" href="#">Why book with us</a></div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="menu-fix-holder"></div>
+            <div class="full-content">
+                <div class="menu-fix-holder-large"></div>
+                <div class="col-lg-10 menu menu_closed-xs">
+                    <div class="menu-login">
+                        <div class="menu-login__item">
+                            <b><a href="/login/" data-toggle="modal" data-target="#login">Log in</a></b>
+                        </div>
+                    </div>
+                    <form action="/hotels/" method="get" class="form-inline">
+                        <div class="input-group">
+                            <div class="form-group">
+                                <input type="hidden" id="type" name="type" value="">
+                                <input type="hidden" id="tid" name="tid" value="">
+                                <input type="text" class="form-control size4" id="query" name="query" autocomplete="off"
+                                    placeholder="Where do you want to go?" value="" onkeyup="search(this);"
+                                    onfocus="change(this);">
+                                <ul class="dropdown-menu" id="dopdown_search" style="display:none;">
+                                </ul>
+                                <script>
+                                    $(document).ready(function () {
+                                        var queryPlaceholder = $('#query').attr('placeholder');
+                                        var queryMenu = $('#query').closest('.menu');
+                                        var query = '';
+                                        var showMeny = function () {
+                                            $('#query').attr('placeholder', '');
+                                            queryMenu.removeClass('menu_closed-xs');
+                                        };
+
+                                        $('#query').keypress(showMeny).click(showMeny).focus(showMeny);
+                                        // Открытие/закрытие описания у отелей
+                                        (function () {
+                                            var el = document.querySelectorAll('.rooms-block');
+                                            if (el.length) {
+                                                for (var i = 0; i <= el.length - 1; i++) { // Делаем работу открытия/закрытия
+                                                    el[i].classList.add('is-closed'); // Защита от выключенного js
+                                                    el[i].onclick = function (e) {
+                                                        var tg = e.target;
+                                                        if (tg.className != 'room-title__text') {
+                                                            return;
+                                                        }
+                                                        this.classList.toggle('is-closed');
+                                                    }
+                                                }
+                                            }
+                                        })();
+
+                                        // Обрезаем в названии офферов всё после двоеточия
+                                        (function () {
+                                            var el = document.querySelectorAll('.room-title__text');
+                                            for (var i = 0; i <= el.length - 1; i++) {
+                                                var name = el[i].innerHTML;
+                                                name = name.replace(/:.*/gm, '');
+                                                el[i].innerHTML = name;
+                                            }
+                                        })();
+
+                                        // Открытие-закрытие описания комнаты
+                                        (function () {
+                                            var el = document.querySelectorAll('.room-description');
+                                            if (el.length) {
+                                                for (var i = 0; i <= el.length - 1; i++) { // Делаем работу открытия/закрытия
+                                                    el[i].classList.add('is-closed'); // Защита от выключенного js
+                                                    el[i].onclick = function (e) {
+                                                        var tg = e.target;
+                                                        if (tg.className == 'room-description__more') {
+                                                            this.classList.remove('is-closed');
+                                                        }
+                                                        if (tg.className == 'room-description__less') {
+                                                            this.classList.add('is-closed');
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        })();
+
+                                        // $(document).on('click', '.description-list__title', function() {
+                                        //     if ($(this).closest('.description-list').index() > 1) {
+                                        //         $(this).closest('li').find('.description-list__content').toggleClass('is-opened');
+                                        //     }
+                                        // });
+
+                                        if (!($('.btn').is('.xs-button-fixed'))) {
+                                            $('.menu').stick_in_parent();
+                                        }
+
+                                        $('.styler').styler();
+
+                                        $('#dropdownParent  ul, .calendar').on('click', function (event) {
+                                            //alert($(this).parent().attr('class'));
+                                            event.stopPropagation();
+                                            //$(this).parent().toggleClass('open');
+                                        });
+
+                                        // Заполняем кнопку guests в меню.
+                                        function checkGuestsCount(childsOnly) {
+                                            var block = $('#dropdownParent');
+                                            var adultsCount = block.find('input[name="adults"]').val();
+                                            var childrenCount = block.find('input[name="childs"]').val();
+                                            if (childsOnly !== undefined) {
+                                                block.find('#dopdown_users').html("Adults: " + adultsCount + ", Children: " + childsOnly)
+                                                $('input[name="childs"]').val(childsOnly);
+                                            } else {
+                                                block.find('#dopdown_users').html("Adults: " + adultsCount + ", Children: " + childrenCount)
+                                            }
+                                        }
+
+                                        checkGuestsCount();
+                                        $(document).on('change', '#dropdownParent .dropdown-menu input', function () {
+                                            checkGuestsCount();
+                                        });
+
+                                        $(document).on('keyup', '#childs', function () {
+                                            checkGuestsCount($(this).val())
+                                        });
+
+                                        // Динамично меняем количество детей в отеле
+                                        var hotelChildAges = (function () {
+                                            var exports = {};
+                                            var selectors = {
+                                                input: '#childs',
+                                                block: '.fileds-group-child',
+                                                wrapper: '.group-child-input-wrapper',
+                                                ageInput: 'input.fields-group-child-input'
+                                            };
+                                            var $input = $(selectors.input);
+                                            var $wrapper = $(selectors.wrapper);
+
+                                            exports.init = function () {
+                                                exports.events();
+                                                exports.check();
+                                                exports.render($input.val());
+                                            };
+
+                                            exports.events = function () {
+                                                $input.on('keyup', function () {
+                                                    exports.render($(this).val());
+                                                });
+                                            };
+
+                                            exports.check = function () {
+                                                if ($input.val() < 1) {
+                                                    $(selectors.block).css('display', 'none');
+                                                }
+                                            };
+
+                                            exports.render = function (count) {
+                                                var $children = $wrapper.children(selectors.ageInput);
+                                                if ($children.length) {
+                                                    $children.styler();
+                                                } else {
+                                                    // Чтобы не было нуля детей
+                                                    if (count < 1) {
+                                                        $(selectors.block).css('display', 'none');
+                                                    } else {
+                                                        // Пишем не больше 21
+                                                        if (count > 21) count = 21;
+                                                        var block = '';
+                                                        $wrapper.html('');
+
+                                                        for (var i = 0; i <= count - 1; ++i) {
+                                                            block += `
+                                                            <input type="number" class="fields-group-child-input"
+                                                                   name="childrenAge[]" value="1">
+                                                        `;
+                                                        }
+
+                                                        $wrapper.html(block);
+                                                        $(selectors.ageInput).styler();
+                                                        $(selectors.block).css('display', 'inline-block');
+                                                    }
+                                                }
+                                            };
+
+                                            exports.init();
+
+                                            return exports;
+                                        })();
+
+                                        // Возраст детей
+                                        (function () {
+                                            var selectors = {
+                                                input: 'input[name="childs"]',
+                                                children: '#childs',
+                                                age: {
+                                                    dropdown: '.child-dropdown',
+                                                    input: '.child-input',
+                                                    ok: '.js-close-child-dropdown',
+                                                    inputs: '.child-input, .fields-group-child-input'
+                                                }
+                                            };
+                                            var months = [
+                                                'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                                                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+                                            ];
+                                            var ageArray = JSON.parse('[]');
+
+                                            function init() {
+                                                if (ageArray.length > 0) {
+                                                    changeAgeBlock(ageArray.length, ageArray);
+                                                }
+
+                                                $(selectors.input).change(function () {
+                                                    var count = $(this).val();
+                                                    changeAgeBlock(parseInt(count));
+                                                    $(selectors.children).val(count);
+                                                    hotelChildAges.render(count);
+                                                });
+
+                                                // Не даём счётчику возраста детей опуститься меньше 1.
+                                                $(document).on('change', selectors.age.inputs, function () {
+                                                    if ($(this).val() < 1) $(this).val(1);
+                                                });
+
+                                                // Скрываем блок возраста детей при нажатии "OK".
+                                                $(selectors.age.dropdown).on('click', selectors.age.ok, function () {
+                                                    $(selectors.age.dropdown).hide();
+                                                });
+                                            }
+
+                                            function changeAgeBlock(count, ages) {
+                                                var d = new Date();
+                                                var date = d.getDate() + ' ' + months[d.getMonth()];
+                                                var block = `<p>Age of children on ${date}</p>`;
+
+                                                if (count > 0) {
+                                                    var balance = count % 3;
+                                                    for (var i = 1; i < count + 1; i++) {
+                                                        var styles = getStyles(i, count, balance);
+                                                        var value = 1;
+
+                                                        if (ages !== undefined && Array.isArray(ages)) {
+                                                            value = ages[i - 1];
+                                                        }
+
+                                                        block += `
+                                                        <div class="child-input-wrap" style="${styles}">
+                                                            <input type="number" name="childrenAge[]"
+                                                                   class="child-input" value="${value}">
+                                                        </div>
+                                                    `;
+                                                    }
+
+                                                    block += `
+                                                    <div class="child-close-btn">
+                                                        <span class="btn btn-sm btn-info js-close-child-dropdown">
+                                                            OK
+                                                        </span>
+                                                    </div>
+                                                `;
+
+                                                    showAgeBlock(block);
+                                                } else {
+                                                    hideAgeBlock();
+                                                }
+                                            }
+
+                                            function getStyles(iteration, count, balance) {
+                                                var styles = '';
+
+                                                if (iteration % 3 !== 0) {
+                                                    styles += 'border-right:1px solid #5EC7CF;';
+                                                }
+
+                                                // Если в последней строке 3 элемента
+                                                // и мы находимся на одном из них
+                                                var condition1 = balance === 0 && (count + 1 - iteration) > 3;
+                                                // Если в последней строке не 3 элемента
+                                                // и мы находимся на одном из них
+                                                var condition2 = balance !== 0 && (count + 1 - iteration) > 3;
+
+                                                if (condition1 || condition2) {
+                                                    styles += 'padding-bottom:20px;';
+                                                } else {
+                                                    styles += 'padding-bottom:10px;margin-bottom:10px;';
+                                                }
+
+                                                return styles;
+                                            }
+
+                                            function showAgeBlock(block) {
+                                                $(selectors.age.input).styler('destroy');
+                                                $(selectors.age.dropdown).empty();
+                                                $(selectors.age.dropdown).append(block);
+                                                $(selectors.age.input).styler();
+                                                $(selectors.age.dropdown).show();
+                                            }
+
+                                            function hideAgeBlock() {
+                                                $(selectors.age.dropdown).empty();
+                                                $(selectors.age.dropdown).hide();
+                                            }
+
+                                            init();
+                                        })();
+
+                                        var searchInput1 = $("[name='check_in']"), searchInput2 = $("[name='check_out']");
+                                        $('.calendar').datepicker({
+                                            defaultDate: $.datepicker.parseDate($.datepicker._defaults.dateFormat, searchInput1.val()),
+                                            numberOfMonths: 2,
+                                            beforeShowDay: function (date) {
+                                                var check_in = $.datepicker.parseDate($.datepicker._defaults.dateFormat, searchInput1.val());
+                                                var check_out = $.datepicker.parseDate($.datepicker._defaults.dateFormat, searchInput2.val());
+                                                return [true, check_in && ((date.getTime() == check_in.getTime()) || (check_out && date >= check_in && date <= check_out)) ? "dp-highlight" : ""];
+                                            }, onSelect: function (dateText, inst) {
+                                                var check_in = $.datepicker.parseDate($.datepicker._defaults.dateFormat, searchInput1.val());
+                                                var check_out = $.datepicker.parseDate($.datepicker._defaults.dateFormat, searchInput2.val());
+                                                var selectedDate = $.datepicker.parseDate($.datepicker._defaults.dateFormat, dateText);
+                                                if (!check_in || check_out) {
+                                                    searchInput1.val(dateText);
+                                                    searchInput2.val("");
+                                                    $(this).datepicker();
+                                                } else if (selectedDate < check_in) {
+                                                    searchInput2.val(searchInput1.val());
+                                                    searchInput1.val(dateText);
+                                                    $(this).datepicker();
+                                                } else {
+                                                    $(this).closest('.open').toggleClass('open');
+                                                    searchInput2.val(dateText);
+                                                    $(this).datepicker();
+                                                }
+                                            }
+                                        });
+
+                                        // Fix the 'Book' button;
+                                        (function () {
+                                            if (document.getElementsByClassName('md-button-fixed').length > 0) {
+                                                function fixBookingButton() {
+                                                    var winW = document.documentElement.clientWidth;
+                                                    var button = document.getElementsByClassName('md-button-fixed')[0];
+                                                    if (winW > 1200) {
+                                                        var winH = document.documentElement.clientHeight;
+                                                        var contentBox = document.getElementsByClassName('full-content')[0].getBoundingClientRect();
+                                                        var rightEdge = winW - contentBox.right;
+                                                        var buttonBox = document.getElementsByClassName('md-button-fixed')[0].getBoundingClientRect();
+                                                        if ((buttonBox.bottom + 20) <= contentBox.bottom) {
+                                                            button.style.transform = 'translate( ' + (0 - (rightEdge - 86)) + 'px, -24.6vh)';
+                                                        } else {
+                                                            button.style.transform = 'translate( ' + (0 - (rightEdge - 86)) + 'px, -' + (winH - contentBox.bottom) + 'px)';
+                                                        }
+                                                    } else {
+                                                        button.style.transform = 'none';
+                                                    }
+                                                }
+
+                                                window.onresize = function () {
+                                                    fixBookingButton();
+                                                }
+                                                window.onscroll = function () {
+                                                    fixBookingButton();
+                                                }
+                                                fixBookingButton();
+                                            }
+                                        })();
+
+                                    });
+                                    function setCategory(obj) {
+                                        $('[name="hotel_category"]').val($(obj).attr('value'));
+                                        $('#dopdown_categories').text($(obj).text());
+                                    }
+                                    function change(input) {
+                                        $('#type').val('');
+                                        $('#tid').val('');
+                                    }
+                                    function search(input) {
+                                        if ($(input).val().length > 2) $.ajax({
+                                            url: '/hotels/',
+                                            type: 'GET',
+                                            dataType: 'JSON',
+                                            data: { search: $(input).val() },
+                                            success: function (data) {
+                                                var $ul = $(input).next('ul');
+                                                $ul.html('');
+                                                for (var i = 0; i < data.length; i++) {
+                                                    if (data[i].type == 'hotel') {
+                                                        var title = data[i].title;
+                                                        if (!(data[i].city === null)) title = title + ' (' + data[i].city + ')';
+                                                        $ul.append('<li><a href="#" onclick="return setHotel(' + data[i].id + ', \'' + title + '\');"><i class="fa fa-home"></i> ' + title + '</a></li>');
+                                                    } else if (data[i].type == 'country') {
+                                                        var title = data[i].country;
+                                                        $ul.append('<li><a href="#" onclick="return setCountry(\'' + title + '\');"><i class="fa fa-map-marker"></i> ' + title + '</a></li>');
+                                                    } else if (data[i].type == 'city') {
+                                                        var title = data[i].city;
+                                                        if (!(data[i].country === null)) title = title + ' (' + data[i].country + ')';
+                                                        $ul.append('<li><a href="#" onclick="return setCity(\'' + data[i].code + '\', \'' + title + '\');"><i class="fa fa-map-marker"></i> ' + title + '</a></li>');
+                                                    }
+                                                }
+                                                if (data.length) $ul.show(); else $ul.hide();
+                                            }
+                                        });
+                                    }
+                                    function setHotel(id, title) {
+                                        $('#query').val(title);
+                                        $('#type').val('hotel');
+                                        $('#tid').val(id);
+                                        $('#dopdown_search').hide();
+                                        return false;
+                                    }
+                                    function setCity(id, title) {
+                                        $('#query').val(title);
+                                        $('#type').val('city');
+                                        $('#tid').val(id);
+                                        $('#dopdown_search').hide();
+                                        return false;
+                                    }
+                                    function setCountry(title) {
+                                        $('#query').val(title);
+                                        $('#type').val('');
+                                        $('#tid').val('');
+                                        $('#dopdown_search').hide();
+                                        return false;
+                                    }
+                                </script>
+                            </div>
+
+                            <span class="menu-calendar-wrapper">
+                                <div class="form-group" title="Check in" data-toggle="dropdown">
+                                    <input type="text" class="form-control size1" readonly="true" name="check_in"
+                                        id="dopdown_calendar" placeholder="Check in" aria-describedby="checkIn"
+                                        value="">
+                                    <span id="checkIn" class="fa fa-calendar form-control-feedback"></span>
+                                </div>
+                                <div class="form-group" title="Check out" data-toggle="dropdown">
+                                    <input type="text" class="form-control size1" readonly="true" name="check_out"
+                                        id="js-checkout" placeholder="Check out" aria-describedby="checkOut" value="">
+                                    <span id="checkOut" class="fa fa-calendar form-control-feedback"></span>
+                                </div>
+                                <ul class="dropdown-menu" aria-labelledby="dopdown_calendar">
+                                    <li>
+                                        <div class="calendar"></div>
+                                    </li>
+                                </ul>
+                            </span>
+
+                            <div class="form-group" id="dropdownParent" title="Guests">
+
+                                <button class="form-control menu-guests-count dropdown-toggle text-left"
+                                    data-toggle="dropdown" id="dopdown_users">Guests
+                                </button>
+                                <span id="guests" class="fa fa-users form-control-feedback"></span>
+
+                                <ul class="dropdown-menu" aria-labelledby="dopdown_users">
+                                    <li class="dropdown-header">
+                                        Adult
+                                        <input type="number" name="adults" class="styler" value="1">
+                                    </li>
+
+                                    <div role="separator" class="divider"></div>
+                                    <li class="dropdown-header" style="margin-bottom:3px;">
+                                        Children
+                                        <input type="number" name="childs" class="styler" value="0">
+                                        <div class="child-dropdown"></div>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <div class="form-group last pseudo-dropdown">
+                                <input class="form-control size2" name="hotel_category" type="hidden"
+                                    aria-describedby="hotelCategory">
+
+                                <button class="form-control size2 dropdown-toggle text-left" data-toggle="dropdown"
+                                    id="dopdown_categories">Hotel category
+                                </button>
+
+                                <ul class="dropdown-menu" aria-labelledby="dopdown_users">
+                                    <!--
+    <option value="family">Family</option>
+    <option value="design">Design</option>
+    <option value="ultimate-luxury">Ultimate Luxury</option>
+    <option value="business">Business</option>
+    <option value="historical">Historical</option>
+    <option value="eco">Eco</option>-->
+
+                                    <li value="beach" class="dropdown-header" onclick='setCategory(this)'>
+                                        Beach </li>
+                                    <li value="mountain" class="dropdown-header" onclick='setCategory(this)'>
+                                        Mountain </li>
+                                    <li value="active" class="dropdown-header" onclick='setCategory(this)'>
+                                        Active </li>
+                                    <li value="city" class="dropdown-header" onclick='setCategory(this)'>
+                                        City </li>
+                                    <li value="countryside" class="dropdown-header" onclick='setCategory(this)'>
+                                        Countryside </li>
+                                </ul>
+                                <span id="hotelCategory" class="fa fa-bars form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="menu__button">
+                            <button type="submit" class="btn btn-info size3">Search</button>
+                        </div>
+                    </form>
+                    <link href="/lib/jquery/datepicker/jquery-ui.min.css?1" rel="stylesheet">
+                    <script src="/lib/jquery/datepicker/jquery-ui.min.js?1"></script>
+
+                </div>
+                <div class="col-lg-10 content">
+                    <div class="index">
+                        <div class="block1">
+                            <h1>YAS Viceroy Abu Dhabi</h1>
+                            <div class="fotorama" data-autoplay="true" data-loop="true">
+                                <img class="img-slider" src="./img/files/scenarios_slider/scenarios_slider_21143.jpg">
+                                <img class="img-slider" src="./img/files/scenarios_slider/scenarios_slider_21144.jpg">
+                                <img class="img-slider" src="./img/files/scenarios_slider/scenarios_slider_21145.jpg">
+                                <img class="img-slider" src="./img/files/scenarios_slider/scenarios_slider_21146.jpg">
+                                <img class="img-slider" src="./img/files/scenarios_slider/scenarios_slider_21147.jpg">
+                                <img class="img-slider" src="./img/files/scenarios_slider/scenarios_slider_21148.jpg">
+                            </div>
+                            <a href="/scenarios/yas-viceroy-crazy-and-luxurious/" class="link">
+                                <h3>YAS Viceroy</h3>
+                                <div class="description1">
+                                    <p>All the fun you can have in Abu Dhabi plus the Ferrari World</p>
+                                </div>
+                            </a>
+                            <div class="text-center"><a href="/scenarios/yas-viceroy-crazy-and-luxurious/"
+                                    class="btn btn-info">Read
+                                    More</a></div>
+                        </div>
+                        <div class="block2">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <a href="/scenarios/oriental-fairy-tale/" class="link">
+                                        <div class="img"><img
+                                                src="/files/scenarios_index_photo/scenarios_index_photo_21162.jpg">
+                                        </div>
+                                        <h3>Dubai</h3>
+                                        <h2>Dubai: Oriental Fairy Tale</h2>
+                                        <div class="description">
+                                            <p>A temple of true Oriental hospitality with tons to do for every member of
+                                                the family</p>
+                                        </div>
+                                    </a>
+                                    <div class="text-center"><a href="/scenarios/oriental-fairy-tale/"
+                                            class="btn btn-info">Read More</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <a href="/scenarios/himalayanexplorer/" class="link">
+                                        <div class="img"><img
+                                                src="/files/scenarios_index_photo/scenarios_index_photo_67.jpg"></div>
+                                        <h3>Bhutan</h3>
+                                        <h2>HIMALAYAN EXPLORER</h2>
+                                        <div class="description">
+                                            <p>Uma by COMO is actually two stunningly stylish hotel in the most
+                                                beautiful locations of the
+                                                least travelled country of the world.</p>
+                                        </div>
+                                    </a>
+                                    <div class="text-center"><a href="/scenarios/himalayanexplorer/"
+                                            class="btn btn-info">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <!------------------------- Footer -------------------------------->
+            <div class="col-lg-offset-2 col-lg-10 footer container">
+
+                <div class="pull-left mright6">
+                    <h3>ABOUT</h3>
+                    <p><a href="/team/">About Us</a></p>
+                    <p><a href="/contact/">Contact Us</a></p>
+                    <p><a href="/about/">Why Book With Us</a></p>
+                </div>
+                <div class="pull-left mright6">
+                    <h3>Destinations</h3>
+                    <p><a
+                            href="http://sunbirdfamilyhotels.com/hotels/?type=city&tid=GBLON@&query=London+%28United+Kingdom%29&check_in=&check_out=&adults=1&childs=0&rooms=1&hotel_cat">London
+                            Family Hotels</a></p>
+                    <p><a
+                            href="http://sunbirdfamilyhotels.com/hotels/?type=city&tid=FRPAR@&query=Paris+%28France%29&check_in=&check_out=&adults=1&childs=0&rooms=1&hotel_category=">Paris
+                            Family Hotels</a></p>
+                </div>
+                <div class="pull-left mright6">
+                    <h3>PARTNERS</h3>
+                </div>
+                <div class="social pull-right">
+                    <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+                    <a href="https://twitter.com/"><i class="fa fa-twitter"></i></a>
+                </div>
+                <div class="clearfix"></div>
+                <p class="text-right">&copy; SunbirdFamilyHotels.com 2017 / <a href="/privacy/">Privacy</a> / <a
+                        href="/terms/">Terms</a></p>
+
+            </div>
+        </div>
+    </div>
+
+    <!--------------------------------- Modal ---------------------------------------------->
+
+    <div class="modal fade" id="login" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content2">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            class="glyphicon glyphicon-remove"></span></button>
+                    <h4 class="modal-title">Welcome to <span>Sunbird</span></h4>
+                    <form action="/login/" method="post">
+                        <div class="form-group">
+                            <label for="email">E-Mail</label>
+                            <input class="form-control" placeholder="E-Mail" id="email" name="email" type="email"
+                                value="" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input class="form-control" placeholder="Password" id="password" name="password"
+                                type="password" value="">
+                        </div>
+                        <p class="pull-left mtop"><a href="/login/?forget">Forget password?</a></p>
+                        <p class="text-right">
+                            <button type="submit" class="btn btn-info">Login</button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $('#login').on('shown.bs.modal', function (e) {
+                $('.modal-dialog').css('margin-top', ($(window).height() - $('.modal-dialog').height()) / 2 - 40);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

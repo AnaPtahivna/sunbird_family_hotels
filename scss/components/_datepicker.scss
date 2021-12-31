@@ -1,0 +1,121 @@
+.dp-highlight .ui-state-default{
+  background-color: #57C4CB !important;
+  color: #fff !important;
+}
+
+.ui-datepicker-today .ui-state-default {
+  background-color: #fff;
+  color: #000;
+}
+
+#dates {
+  display: inline-block;
+  padding: 10px 0 20px;
+  border: 1px solid #cfcfcf;
+}
+
+#dates .ui-widget {
+  font-family: 'Oswald-Light', sans-serif;
+}
+
+#dates .ui-widget-header {
+  background: transparent;
+  border: none;
+}
+
+#dates .ui-datepicker .ui-datepicker-title {
+  text-transform: none;
+  font-size: 1em;
+  margin-top: 0;
+}
+
+#dates .ui-widget-content {
+  border: none;
+}
+
+#dates .ui-datepicker table {
+    font-size: 0.8em;
+}
+
+#dates .ui-datepicker tbody tr:first-child {
+    border-top: none;
+}
+
+#dates .ui-corner-all,
+#dates .ui-corner-bottom,
+#dates .ui-corner-right,
+#dates .ui-corner-br {
+  border-radius: 0 !important;
+}
+
+.ui-datepicker.ui-corner-all {
+  border-radius: 0 !important;
+}
+
+#dates .ui-state-hover,
+#dates .ui-widget-content .ui-state-hover,
+#dates .ui-widget-header .ui-state-hover,
+#dates .ui-state-focus,
+#dates .ui-widget-content .ui-state-focus,
+#dates .ui-widget-header .ui-state-focus {
+  background: transparent;
+  border-color: #cfcfcf;
+}
+
+#dates .ui-state-hover a,
+#dates .ui-state-hover a:hover,
+#dates .ui-state-hover a:link,
+#dates .ui-state-hover a:visited {
+  background: transparent;
+  border-color: #cfcfcf;
+}
+
+#dates .ui-datepicker-calendar a {
+  padding: 4px 0;
+}
+
+#dates .ui-widget-header .ui-icon {
+  position: relative;
+  background: transparent;
+  border-top: 1px solid #cfcfcf;
+  border-right: 1px solid #cfcfcf;
+}
+
+#dates .ui-icon-circle-triangle-w::before,
+#dates .ui-icon-circle-triangle-e::before {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90%;
+  height: 90%;
+}
+
+#dates .ui-icon-circle-triangle-w {
+  transform: rotate(-135deg);
+  left: 64% !important;
+}
+
+#dates .ui-icon-circle-triangle-e {
+  transform: rotate(45deg);
+  left: 34% !important;
+}
+
+#dates .ui-state-default,
+#dates .ui-widget-content .ui-state-default,
+#dates .ui-widget-header .ui-state-default {
+  border-color: transparent;
+  border-top-color: #cfcfcf;
+  color: #000;
+  background: transparent;
+}
+
+#dates .dp-highlight .ui-state-default {
+  background: #5fc7d0!important;
+  color: #FFF!important;
+}
+
+#dates .ui-datepicker td {
+  margin: 0;
+  padding: 0;
+}

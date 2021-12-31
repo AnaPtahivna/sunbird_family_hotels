@@ -1,0 +1,120 @@
+
+/* logo */
+
+.logo-title {
+  margin-right: 40px;
+  padding: 7px 0;
+  display: block;
+  font-family: 'Titillium-Regular';
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  color: #5fc7d0;
+  border-top: 1px solid #5fc7d0;
+  margin-bottom: 70px;
+}
+
+.logo {
+  padding: 5px 0;
+  font-family: 'Oswald-Medium', 'sans-serif';
+  text-transform: uppercase;
+  position: relative;
+  z-index: 80;
+  font-size: 25px;
+  color: #33b6cf;
+}
+
+.logo .list a {
+  color: #000;
+  margin-bottom: 60px;
+}
+
+.item__line {
+  margin: 10px 0;
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid #000;
+}
+
+
+.item__line_large {
+  margin-bottom: 26px;
+}
+
+.links {
+  font-family: 'Oswald-Light', 'sans-serif';
+  text-transform: none;
+  font-size: 18px;
+}
+
+.scenario {
+  font-family: 'Oswald-Medium', 'sans-serif';
+  font-size: 25px;
+  color: #33b6cf;
+}
+
+.login {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.item {
+  margin-right: 40px;
+  margin-bottom: 23px;
+}
+
+.item_small {
+  font-size: 13px;
+}
+
+.item_small,
+.item_small :hover,
+.item_small :focus,
+.item_small :visited {
+  margin-bottom: 8px;
+  letter-spacing: 0.025em;
+}
+
+.menu-link-item {
+  font-family: 'Oswald-Light', 'sans-serif';
+  margin-bottom: 8px;
+  text-decoration-color: #000;
+  font-weight: 400;
+  }
+
+
+/* sidebar */
+
+.sidebar ,
+.sidebar :hover,
+.sidebar :active,
+.sidebar :visited {
+  display: inline-block;
+  color: #000;
+  line-height: 1.15;
+  letter-spacing: 0.005em;
+  outline: none;
+}
+
+.sidebar :hover {
+  color: #33b6cf;
+}
+
+.sidebar-item {
+  padding-right: 10px;
+}
+
+.orders {
+  margin-top: 20px;
+}
+
+.profile a {
+  color: #000;
+}
+
+
+.logo-sidebar {
+  margin-top: 20px;
+  margin-bottom: 13px;
+}

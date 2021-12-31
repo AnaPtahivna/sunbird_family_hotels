@@ -1,0 +1,32 @@
+.footer {
+width: 750px;
+background-color: #000;
+padding: 20px 40px;
+}
+
+.footer {
+  width: 750px;
+  background: #1f1f1f;
+  color: #5ec7cf;
+  padding: 20px 40px;
+  font-family: 'Titillium-Regular', 'sans-serif';
+}
+
+
+.footer h3 {
+  margin: 10px 0;
+  color: #fff;
+  text-transform: uppercase;
+  font: 18px 'Oswald-Medium', 'sans-serif';
+}
+
+.social {
+  font-size: 24px;
+  padding: 10px 0 10px 10px;
+}
+
+.text-right {
+    display: block;
+    align-items: right;
+    justify-content: flex-end;
+}
